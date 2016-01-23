@@ -69,7 +69,7 @@ Background.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
-function Unicorn(game) {
+function Player(game) {
     this.animation = new Animation(ASSET_MANAGER.getAsset("./hgun_move.png"), 0, 0, 258, 220, 0.02, 1, true, true);
     this.walkRight = new Animation(ASSET_MANAGER.getAsset("./hgun_move.png"), 0, 0, 258, 220, 0.1, 12, false, true);
     this.reloadAnimation = new Animation(ASSET_MANAGER.getAsset("./hgun_reload.png"), 0, 0, 258, 220, .1, 11, false, true);
@@ -80,10 +80,10 @@ function Unicorn(game) {
     Entity.call(this, game, 0, 400);
 }
 
-Unicorn.prototype = new Entity();
-Unicorn.prototype.constructor = Unicorn;
+Player.prototype = new Entity();
+Player.prototype.constructor = Player;
 
-Unicorn.prototype.update = function () {
+Player.prototype.update = function () {
     if (this.game.d) this.right = true;
     if (this.right) {
         if (this.walkRight.isDone()) {
@@ -93,10 +93,6 @@ Unicorn.prototype.update = function () {
         this.x = this.x += 10;
      
     }
-    Entity.prototype.update.call(this);
-}
-
-Unicorn.prototype.update = function () {
     if (this.game.r) this.reload = true;
     if (this.reload) {
         if (this.reloadAnimation.isDone()) {
@@ -111,7 +107,7 @@ Unicorn.prototype.update = function () {
 
 
 
-Unicorn.prototype.draw = function (ctx) {
+Player.prototype.draw = function (ctx) {
 
     if (this.right) {
         this.walkRight.drawFrame(this.game.clockTick, ctx, this.x+10, this.y);
@@ -140,7 +136,7 @@ ASSET_MANAGER.downloadAll(function () {
 
     var gameEngine = new GameEngine();
     var bg = new Background(gameEngine);
-    var unicorn = new Unicorn(gameEngine);
+    var unicorn = new Player(gameEngine);
 
     gameEngine.addEntity(bg);
     gameEngine.addEntity(unicorn);
