@@ -1,0 +1,15 @@
+survivor-reload_handgun_0 = 0 0 260 230
+survivor-reload_handgun_1 = 0 231 260 230
+survivor-reload_handgun_10 = 261 0 260 230
+survivor-reload_handgun_11 = 261 231 260 230
+survivor-reload_handgun_12 = 522 0 260 230
+survivor-reload_handgun_13 = 522 231 260 230
+survivor-reload_handgun_14 = 0 462 260 230
+survivor-reload_handgun_2 = 0 693 260 230
+survivor-reload_handgun_3 = 261 462 260 230
+survivor-reload_handgun_4 = 261 693 260 230
+survivor-reload_handgun_5 = 522 462 260 230
+survivor-reload_handgun_6 = 522 693 260 230
+survivor-reload_handgun_7 = 783 0 260 230
+survivor-reload_handgun_8 = 783 231 260 230
+survivor-reload_handgun_9 = 783 462 260 230

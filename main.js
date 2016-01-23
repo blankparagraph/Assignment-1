@@ -70,9 +70,11 @@ Background.prototype.draw = function (ctx) {
 }
 
 function Unicorn(game) {
-    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/hgun_move.png"), 0, 0, 258, 220, 0.02, 1, true, true);
-    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/hgun_move.png"), 0, 0, 258, 220, 0.03, 12, true, true);
-    this.right = true;
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./hgun_move.png"), 0, 0, 258, 220, 0.02, 1, true, true);
+    this.walkRight = new Animation(ASSET_MANAGER.getAsset("./hgun_move.png"), 0, 0, 258, 220, 0.1, 12, false, true);
+    this.reloadAnimation = new Animation(ASSET_MANAGER.getAsset("./hgun_reload.png"), 0, 0, 258, 220, .1, 11, false, true);
+    this.right = false;
+    this.reload = false;
     this.radius = 100;
     this.ground = 400;
     Entity.call(this, game, 0, 400);
@@ -84,7 +86,25 @@ Unicorn.prototype.constructor = Unicorn;
 Unicorn.prototype.update = function () {
     if (this.game.d) this.right = true;
     if (this.right) {
-       this.x = this.x+=10;
+        if (this.walkRight.isDone()) {
+            this.walkRight.elapsedTime = 0;
+            this.right = false;
+        }
+        this.x = this.x += 10;
+     
+    }
+    Entity.prototype.update.call(this);
+}
+
+Unicorn.prototype.update = function () {
+    if (this.game.r) this.reload = true;
+    if (this.reload) {
+        if (this.reloadAnimation.isDone()) {
+            this.reloadAnimation.elapsedTime = 0;
+            this.reload = false;
+        }
+        this.x = this.x;
+
     }
     Entity.prototype.update.call(this);
 }
@@ -94,7 +114,10 @@ Unicorn.prototype.update = function () {
 Unicorn.prototype.draw = function (ctx) {
 
     if (this.right) {
-        this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x+10, this.y);
+        this.walkRight.drawFrame(this.game.clockTick, ctx, this.x+10, this.y);
+    }
+    else if (this.reload) {
+        this.reloadAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     }
     else {
         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
@@ -106,7 +129,9 @@ Unicorn.prototype.draw = function (ctx) {
 
 var ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./img/hgun_move.png");
+ASSET_MANAGER.queueDownload("./hgun_reload.png");
+ASSET_MANAGER.queueDownload("./hgun_move.png");
+
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
