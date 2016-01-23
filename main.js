@@ -71,7 +71,7 @@ Background.prototype.draw = function (ctx) {
 
 function Player(game) {
     this.animation = new Animation(ASSET_MANAGER.getAsset("./hgun_move.png"), 0, 0, 258, 220, 0.02, 1, true, true);
-    this.walkRight = new Animation(ASSET_MANAGER.getAsset("./hgun_move.png"), 0, 0, 258, 220, 0.1, 12, false, true);
+    this.walkRight = new Animation(ASSET_MANAGER.getAsset("./hgun_move.png"), 0, 0, 258, 220, 0.05, 12, false, true);
     this.reloadAnimation = new Animation(ASSET_MANAGER.getAsset("./hgun_reload.png"), 0, 0, 258, 220, .1, 11, false, true);
     this.right = false;
     this.reload = false;
